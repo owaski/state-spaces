@@ -1,0 +1,7 @@
+# @package _global_
+defaults:
+  # Inherit from pipeline/cifar
+  # For some reason /pipeline: cifar runs into recursion error
+  - cifar
+  - override /dataset: mnist
+  - override /trainer: default_gradnorm

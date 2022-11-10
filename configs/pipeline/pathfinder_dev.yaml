@@ -1,0 +1,5 @@
+# @package _global_
+defaults:
+  - cifar
+  - override /dataset: pathfinder
+  - override /trainer: default_gradnorm

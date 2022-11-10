@@ -6,3 +6,6 @@ defaults:
 encoder:
   _name_: position
   dropout: ${..dropout}
+
+n_layers: 1
+d_model: 16

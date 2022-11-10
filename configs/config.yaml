@@ -28,6 +28,8 @@ train:
   debug: False # Special settings to make debugging more convenient
   ignore_warnings: False # Disable python warnings
 
+  eval_only: False
+
   # These control state passing between batches
   state:
     mode: null # [ None | 'none' | 'reset' | 'bptt' | 'tbptt' ]
@@ -36,6 +38,8 @@ train:
   # Convenience keys to allow grouping runs
 
   ckpt: null # Resume training
+
+  save_dir: null
 
   disable_dataset: False # Disable dataset loading
   validate_at_start: false
@@ -59,14 +63,14 @@ tolerance: # fault tolerance for training on preemptible machines
 # Set `~wandb` or `wandb=null` or `wandb.mode=disabled` to disable logging
 # If other loggers are added, it would make sense to put this one level lower under train/ or logger/
 wandb:
-  project: hippo
+  project: ssm
   group: ""
   job_type: training
   mode: online # choices=['online', 'offline', 'disabled']
   save_dir: null
   id: null # pass correct id to resume experiment!
   # Below options should not need to be specified
-  # entity: ""  # set to name of your wandb team or just remove it
+  entity: "owaski"  # set to name of your wandb team or just remove it
   # log_model: False
   # prefix: ""
   # job_type: "train"

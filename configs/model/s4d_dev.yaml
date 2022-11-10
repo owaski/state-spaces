@@ -1,0 +1,8 @@
+defaults:
+  - base
+  - override layer: s4d_dev
+
+n_layers: 1
+
+transposed: false # Actually faster than "true"
+tie_dropout: true

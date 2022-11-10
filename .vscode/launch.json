@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "dev",
+            "type": "python",
+            "request": "launch",
+            "module": "train",
+            "env": {
+                "DATA_PATH": "/mnt/data/siqiouyang/datasets/lra_release"
+            },
+            "args": [
+                // "experiment=sc/s4-sc",
+                "pipeline=repeatreg",
+                "model=s4_dev",
+                // "model.layer.0.ema_heads=1",
+                // "model.layer.0.attn_dim_qk=8",
+                // "model.layer.0.attn_dim_value=32",
+                // "model.layer=liquid_s4",
+                "trainer.gpus=0",
+                // "train.eval_only=true",
+                "train.test=true",
+                // "train.ckpt=/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-01/03-57-28-422252/checkpoints/val/accuracy.ckpt",
+                "wandb.mode=disabled"
+            ]
+        }
+    ]
+}

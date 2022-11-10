@@ -193,7 +193,7 @@ class SSKernelNPLR(OptimModule):
 
         # Broadcast everything to correct shapes
         C = C.expand(torch.broadcast_shapes(C.shape, (1, self.H, self.N))) # (C, H, N)
-        B = B.unsqueeze(0) # (1, 1, N)
+        B = B.unsqueeze(0) # (1, S, N)
 
         # Register parameters
         self.C = nn.Parameter(_c2r(_resolve_conj(C)))
@@ -213,7 +213,7 @@ class SSKernelNPLR(OptimModule):
         if self.real_type == 'none':
             return -w_real
         elif self.real_type == 'exp':
-            return torch.log(-w_real) # Some of the HiPPO methods have real part 0
+            return torch.log(-w_real) # Some of the HiPPO methods have real part 0, TODO(siqi): why exp and log here
         elif self.real_type == 'relu':
             return -w_real
         elif self.real_type == 'sigmoid':
@@ -573,6 +573,262 @@ class SSKernelNPLR(OptimModule):
         y = self.output_contraction(self.dC, new_state)
         return y.real, new_state
 
+
+class SSKernelNPLRAlpha(SSKernelNPLR):
+    """
+    Stores a representation of and computes the SSKernel function K_L(dt, alpha * A, sqrt(alpha)B, C) corresponding to a discretized state space, 
+    where A, B are HiPPO-LegS
+    """
+    
+    def __init__(
+        self,
+        w, P, B, C, log_dt,
+        L=None, # starting/maximum length of kernel
+        lr=None,
+        verbose=False,
+        keops=False,
+        real_type='exp', # ['none' | 'exp' | 'relu' | sigmoid']
+        real_tolerance=1e-3,
+        bandlimit=None,
+    ):
+        """
+        L: Maximum length; this module computes an SSM kernel of length L
+        A is represented by alpha * (diag(w) - PP^*)
+        w: (S, N) diagonal part
+        P: (R, S, N) low-rank part
+
+        B: (S, N)
+        C: (C, H, N)
+        dt: (H) timescale per feature
+        lr: [dict | float | None] hook to set lr of special parameters (A, B, dt)
+
+        Dimensions:
+        N (or d_state): state size
+        H (or d_model): total SSM copies
+        S (or n_ssm): number of trainable copies of (A, B, dt); must divide H
+        R (or rank): rank of low-rank part
+        C (or channels): system is 1-dim to C-dim
+
+        The forward pass of this Module returns a tensor of shape (C, H, L)
+
+        Note: tensor shape N here denotes half the true state size, because of conjugate symmetry
+        """
+
+        # print(SSKernelNPLRAlpha.mro())
+
+        super(SSKernelNPLR, self).__init__()
+        self.verbose = verbose
+        self.keops = keops
+        self.bandlimit = bandlimit
+        self.real_type = real_type
+        self.real_tolerance = real_tolerance
+
+        # Rank of low-rank correction
+        self.rank = P.shape[-3]
+        assert w.size(-1) == P.size(-1) == B.size(-1) == C.size(-1)
+        self.H = log_dt.size(-1)
+        self.N = w.size(-1)
+
+        # Check different SSM inits
+        assert w.size(-2) == P.size(-2) == B.size(-2) # n_ssm
+        assert self.H % w.size(0) == 0
+        self.n_ssm = w.size(0)
+        self.broadcast = self.H // w.size(0)  # Each trainable SSM needs to be duplicated this many times
+
+        # Broadcast everything to correct shapes
+        C = C.expand(torch.broadcast_shapes(C.shape, (1, self.H, self.N))) # (C, H, N)
+        B = B.unsqueeze(0) # (1, S, N)
+
+        # Register parameters
+        self.C = nn.Parameter(_c2r(_resolve_conj(C)))
+
+        alpha = torch.ones(self.n_ssm)
+
+        if lr is None or isinstance(lr, float): lr_dict = {}
+        else: lr_dict, lr = lr, None
+
+        self.register("log_dt", log_dt, lr_dict.get('dt', lr))
+        self.register("alpha", alpha, lr_dict.get('alpha', lr))
+
+        self.B = _c2r(B)
+        self.P = _c2r(P)
+        self.inv_w_real = self._w_init(w.real)
+        self.w_imag = w.imag
+        
+        # self.register("B", _c2r(B), lr_dict.get('B', lr))
+        # self.register("P", _c2r(P), lr_dict.get('A', lr))
+        # self.register("inv_w_real", self._w_init(w.real), lr_dict.get('A', lr))
+        # self.register("w_imag", w.imag, lr_dict.get('A', lr))
+
+        self.l_max = L
+        self.register_buffer('L', torch.tensor(0)) # Internal length
+
+    def forward(self, state=None, rate=1.0, L=None):
+        """
+        state: (B, H, N) initial state
+        rate: sampling rate factor
+        L: target length
+
+        returns:
+        (C, H, L) convolution kernel (generally C=1)
+        (B, H, L) output from initial state
+        """
+
+        device = self.alpha.device
+
+        # Initialize C~ if necessary (done in forward pass so it's on the correct device)
+        if self.L.item() == 0 and self.l_max is not None and self.l_max > 0:
+            self._setup_C(self.l_max)
+
+        # Handle sampling rate logic
+        # The idea is that this kernel's length (in continuous units) is self.L, while we are asked to provide a kernel of length L at (relative) frequency rate
+        if L is None:
+            L = round(self.L.item() / rate)
+
+        # Increase the internal length if needed
+        continuous_L = round(rate*L)
+        while continuous_L > self.L.item():
+            self._setup_C(continuous_L)
+        discrete_L = round(self.L.item()/rate)
+
+        dt = torch.exp(self.log_dt) * rate
+        B = _r2c(self.B).to(device) * (self.alpha ** 0.5).view(1, self.n_ssm, 1)
+        C = _r2c(self.C)
+        P = _r2c(self.P).to(device) * (self.alpha ** 0.5).view(1, self.n_ssm, 1)
+        Q = P.conj()
+        w = self._w().to(device) * self.alpha.view(self.n_ssm, 1) # (S, N) where S=n_ssm
+
+        # Address bandlimiting
+        if self.bandlimit is not None:
+            freqs = w.imag.abs() / (2*math.pi)  # (H, N)
+            freqs = dt[:, None] / rate * freqs  # (H, N)
+            mask = torch.where(freqs < self.bandlimit * .5, 1, 0)
+            C = C * mask
+
+        # Get FFT nodes of right length
+        omega, z = self._omega(discrete_L, dtype=w.dtype, device=w.device, cache=(rate==1.0))
+
+        # Broadcast parameters to same hidden features H
+        B = repeat(B, '1 t n -> 1 (v t) n', v=self.broadcast)
+        P = repeat(P, 'r t n -> r (v t) n', v=self.broadcast)
+        Q = repeat(Q, 'r t n -> r (v t) n', v=self.broadcast)
+        w = repeat(w, 't n -> (v t) n', v=self.broadcast)
+
+        # Augment B
+        if state is not None:
+            # Have to "unbilinear" the state to put it into the same "type" as B
+            # Compute 1/dt * (I + dt/2 A) @ state
+
+            # Can do this without expanding (maybe minor speedup using conj symmetry in theory), but it's easier to read this way
+            s = _conj(state) if state.size(-1) == self.N else state # (B H N)
+            sA = (
+                s * _conj(w) # (B H N)
+                - contract('bhm, rhm, rhn -> bhn', s, _conj(Q), _conj(P))
+            )
+            s = s / dt.unsqueeze(-1) + sA / 2
+            s = s[..., :self.N]
+
+            B = torch.cat([s, B], dim=-3)  # (B+1, H, N)
+
+        # Incorporate dt into A
+        w = w * dt.unsqueeze(-1)  # (H N)
+
+        # Stack B and p, C and q for convenient batching
+        B = torch.cat([B, P], dim=-3) # (B+1+R, H, N)
+        C = torch.cat([C, Q], dim=-3) # (C+R, H, N)
+
+        # Incorporate B and C batch dimensions
+        v = B.unsqueeze(-3) * C.unsqueeze(-4)  # (B+1+R, C+R, H, N)
+
+        # Calculate resolvent at omega
+        if has_cauchy_extension and z.dtype == torch.cfloat and not self.keops:
+            r = cauchy_mult(v, z, w, symmetric=True)
+        elif has_pykeops:
+            r = cauchy_conj(v, z, w)
+        else:
+            r = cauchy_naive(v, z, w)
+        r = r * dt[None, None, :, None]  # (B+1+R, C+R, H, L)
+
+        # Low-rank Woodbury correction
+        if self.rank == 1:
+            k_f = r[:-1, :-1, :, :] - r[:-1, -1:, :, :] * r[-1:, :-1, :, :] / (1 + r[-1:, -1:, :, :])
+        elif self.rank == 2:
+            r00 = r[: -self.rank, : -self.rank, :, :]
+            r01 = r[: -self.rank, -self.rank :, :, :]
+            r10 = r[-self.rank :, : -self.rank, :, :]
+            r11 = r[-self.rank :, -self.rank :, :, :]
+            det = (1 + r11[:1, :1, :, :]) * (1 + r11[1:, 1:, :, :]) - r11[:1, 1:, :, :] * r11[1:, :1, :, :]
+            s = (
+                r01[:, :1, :, :] * (1 + r11[1:, 1:, :, :]) * r10[:1, :, :, :]
+                + r01[:, 1:, :, :] * (1 + r11[:1, :1, :, :]) * r10[1:, :, :, :]
+                - r01[:, :1, :, :] * (r11[:1, 1:, :, :]) * r10[1:, :, :, :]
+                - r01[:, 1:, :, :] * (r11[1:, :1, :, :]) * r10[:1, :, :, :]
+            )
+            s = s / det
+            k_f = r00 - s
+        else:
+            r00 = r[:-self.rank, :-self.rank, :, :]
+            r01 = r[:-self.rank, -self.rank:, :, :]
+            r10 = r[-self.rank:, :-self.rank, :, :]
+            r11 = r[-self.rank:, -self.rank:, :, :]
+            r11 = rearrange(r11, "a b h n -> h n a b")
+            r11 = torch.linalg.inv(torch.eye(self.rank, device=r.device) + r11)
+            r11 = rearrange(r11, "h n a b -> a b h n")
+            k_f = r00 - torch.einsum("i j h n, j k h n, k l h n -> i l h n", r01, r11, r10)
+
+        # Final correction for the bilinear transform
+        k_f = k_f * 2 / (1 + omega)
+
+        # Move from frequency to coefficients
+        k = torch.fft.irfft(k_f, n=discrete_L)  # (B+1, C, H, L)
+
+        # # Truncate to target length
+        k = k[..., :L]
+
+        if state is not None:
+            k_state = k[:-1, :, :, :]  # (B, C, H, L)
+        else:
+            k_state = None
+        k_B = k[-1, :, :, :] # (C H L)
+
+        return k_B, k_state
+
+    @torch.no_grad()
+    def _setup_linear(self):
+        """ Create parameters that allow fast linear stepping of state """
+
+        device = self.alpha.device
+        w = self._w().to(device) * self.alpha.view(self.n_ssm, 1)
+        B = _r2c(self.B).to(device) * (self.alpha ** 0.5).view(1, self.n_ssm, 1) # (H N)
+        P = _r2c(self.P).to(device) * (self.alpha ** 0.5).view(1, self.n_ssm, 1)
+        Q = P.conj()
+
+        # Repeat w shape properly
+        B = repeat(B, '1 t n -> 1 (v t) n', v=self.broadcast)
+        P = repeat(P, 'r t n -> r (v t) n', v=self.broadcast)
+        Q = repeat(Q, 'r t n -> r (v t) n', v=self.broadcast)
+        w = repeat(w, 't n -> (v t) n', v=self.broadcast)
+
+        # Prepare Linear stepping
+        dt = torch.exp(self.log_dt)
+        D = (2.0 / dt.unsqueeze(-1) - w).reciprocal()  # (H, N)
+        R = (torch.eye(self.rank, dtype=w.dtype, device=w.device) + 2*contract('r h n, h n, s h n -> h r s', Q, D, P).real) # (H R R)
+        Q_D = rearrange(Q*D, 'r h n -> h r n')
+        try:
+            R = torch.linalg.solve(R, Q_D) # (H R N)
+        except:
+            R = torch.tensor(np.linalg.solve(R.to(Q_D).contiguous().detach().cpu(), Q_D.contiguous().detach().cpu())).to(Q_D)
+        R = rearrange(R, 'h r n -> r h n')
+
+        self.step_params = {
+            "D": D, # (H N)
+            "R": R, # (R H N)
+            "P": P, # (R H N)
+            "Q": Q, # (R H N)
+            "B": B, # (1 H N)
+            "E": 2.0 / dt.unsqueeze(-1) + w, # (H N)
+        }
+    
 
 class SSKernelSlow(OptimModule):
     """Slow version of SSKernel function for illustration and benchmarking.
@@ -940,6 +1196,27 @@ class SSKernel(nn.Module):
                 A, B, C, log_dt, L=L,
                 lr=lr,
             )
+        elif mode == 'nplr_random':
+            w = torch.randn(self.n_ssm, self.N // 2, dtype=cdtype) / np.sqrt(self.N)
+            P = torch.randn(rank, self.n_ssm, self.N // 2, dtype=cdtype) / np.sqrt(self.N)
+            B = torch.randn(self.n_ssm, self.N // 2, dtype=cdtype) / np.sqrt(self.N)
+            C = torch.randn(channels, self.H, self.N // 2, dtype=cdtype) / np.sqrt(self.N)
+
+            self.kernel = SSKernelNPLR(
+                w, P, B, C,
+                log_dt, L=L,
+                lr=lr,
+                verbose=verbose,
+                **kernel_args,
+            )
+        elif mode == 'diag_random':
+            w, P, B, V = dplr.combination(measure, self.N, rank, self.n_ssm, **measure_args)
+
+            self.kernel = SSKernelDiag(
+                w, B, C, log_dt, L=L,
+                lr=lr,
+                **kernel_args,
+            )
         else:
             w, P, B, V = dplr.combination(measure, self.N, rank, self.n_ssm, **measure_args)
 
@@ -970,6 +1247,14 @@ class SSKernel(nn.Module):
                     verbose=verbose,
                     **kernel_args,
                 )
+            elif mode == "nplr_alpha":
+                self.kernel = SSKernelNPLRAlpha(
+                    w, P, B, C,
+                    log_dt, L=L,
+                    lr=lr,
+                    verbose=verbose,
+                    **kernel_args,
+                )
             elif mode == "diag":
                 if not measure.startswith("diag"):
                     log.warning("Diagonal kernel (S4D) activated but initialization is not intended for S4D. Set `measure` to 'diag-lin', 'diag-inv', or 'diag-legs' for the main variants, or 'diag' for a combination of S4D-Lin and S4D-Inv.")
@@ -987,6 +1272,12 @@ class SSKernel(nn.Module):
                     lr=lr,
                 )
             else: raise NotImplementedError(f"{mode=} is not valid")
+        
+        self.B = B
+        self.C = C
+        self.w = w
+        self.log_dt = log_dt
+
 
     def forward(self, state=None, L=None, rate=None):
         return self.kernel(state=state, L=L, rate=rate)

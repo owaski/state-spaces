@@ -659,14 +659,21 @@ def train(config):
         print("Running validation before training")
         trainer.validate(model)
 
-    if config.train.ckpt is not None:
-        trainer.fit(model, ckpt_path=config.train.ckpt)
+    if not config.train.eval_only:
+        if config.train.ckpt is not None:
+            trainer.fit(model, ckpt_path=config.train.ckpt)
+        else:
+            trainer.fit(model)
     else:
-        trainer.fit(model)
+        assert config.train.ckpt is not None
+        state_dict = torch.load(config.train.ckpt, map_location='cpu')
+        model.load_state_dict(state_dict['state_dict'])
     if config.train.test:
         trainer.test(model)
 
-
+    # if config.train.save_dir is not None:
+    #     os.makedirs(config.train.save_dir, exist_ok=True)
+    #     torch.save(model.state_dict(), os.path.join(config.train.save_dir, 'checkpoint.ckpt'))
 
 
 @hydra.main(config_path="configs", config_name="config.yaml")

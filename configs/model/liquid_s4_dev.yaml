@@ -1,0 +1,19 @@
+defaults:
+  - base
+  - override layer: liquid_s4
+
+transposed: false # Actually faster than "true"
+tie_dropout: true
+
+encoder:
+  _name_: position
+  dropout: ${..dropout}
+
+n_layers: 2
+d_model: 16
+
+layer:
+  # n_ssm: 4
+  d_state: 4
+  dt_min: 0.01
+  dt_max: 1

@@ -207,3 +207,67 @@ class Delay(SequenceDataset):
     def __str__(self):
         return f"{self._name_}{self.l_noise}{'v' if self.variable else ''}"
 
+
+class Repeat(SequenceDataset):
+    _name_ = 'repeat'
+
+    @property
+    def init_defaults(self):
+        return {
+            "n_train": 1000, 
+            "n_val": 200,
+            "n_test": 200,
+            "l_seq": 100,
+            "d_seq": 16,
+        }
+
+    @property
+    def d_input(self):
+        return self.d_seq
+
+    @property
+    def d_output(self):
+        return 2
+    
+    @property
+    def l_output(self):
+        return self.l_seq
+
+    def setup(self):
+        from .datasets.repeat import RepeatDataset
+
+        self.dataset_train = RepeatDataset(self.n_train, self.l_seq, self.d_seq)
+        self.dataset_val = RepeatDataset(self.n_val, self.l_seq, self.d_seq)
+        self.dataset_test = RepeatDataset(self.n_test, self.l_seq, self.d_seq)
+
+class RepeatReg(SequenceDataset):
+    _name_ = 'repeatreg'
+
+    @property
+    def init_defaults(self):
+        return {
+            "n_train": 1000, 
+            "n_val": 200,
+            "n_test": 200,
+            "l_seq": 100,
+            "d_seq": 16,
+        }
+
+    @property
+    def d_input(self):
+        return self.d_seq
+
+    @property
+    def d_output(self):
+        return 1
+    
+    @property
+    def l_output(self):
+        return self.l_seq
+
+    def setup(self):
+        from .datasets.repeat import RepeatRegDataset
+
+        self.dataset_train = RepeatRegDataset(self.n_train, self.l_seq, self.d_seq)
+        self.dataset_val = RepeatRegDataset(self.n_val, self.l_seq, self.d_seq)
+        self.dataset_test = RepeatRegDataset(self.n_test, self.l_seq, self.d_seq)

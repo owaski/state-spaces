@@ -1,0 +1,346 @@
+Global seed set to 0
+GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+LOCAL_RANK: 0 - CUDA_VISIBLE_DEVICES: [1]
+wandb: Currently logged in as: owaski. Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.13.4
+wandb: Run data is saved locally in /home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/wandb/run-20221102_235202-2rvtwbje
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run repeat_mega_10xtrain
+wandb: ⭐️ View project at https://wandb.ai/owaski/ssm
+wandb: 🚀 View run at https://wandb.ai/owaski/ssm/runs/2rvtwbje
+Set SLURM handle signals.
+
+  | Name    | Type            | Params
+--------------------------------------------
+0 | model   | SequenceModel   | 4.6 K 
+1 | encoder | Sequential      | 272   
+2 | decoder | SequenceDecoder | 34    
+--------------------------------------------
+4.9 K     Trainable params
+0         Non-trainable params
+4.9 K     Total params
+0.020     Total estimated model params size (MB)
+Global seed set to 0
+Epoch 0, global step 199: val/accuracy reached 0.75460 (best 0.75460), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 1, global step 399: val/accuracy was not in top 1
+Epoch 2, global step 599: val/accuracy reached 0.75490 (best 0.75490), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 3, global step 799: val/accuracy reached 0.75505 (best 0.75505), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 4, global step 999: val/accuracy reached 0.75530 (best 0.75530), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 5, global step 1199: val/accuracy reached 0.75570 (best 0.75570), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 6, global step 1399: val/accuracy was not in top 1
+Epoch 7, global step 1599: val/accuracy reached 0.75585 (best 0.75585), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 8, global step 1799: val/accuracy was not in top 1
+Epoch 9, global step 1999: val/accuracy was not in top 1
+Epoch 10, global step 2199: val/accuracy was not in top 1
+Epoch 11, global step 2399: val/accuracy was not in top 1
+Epoch 12, global step 2599: val/accuracy was not in top 1
+Epoch 13, global step 2799: val/accuracy was not in top 1
+Epoch 14, global step 2999: val/accuracy was not in top 1
+Epoch 15, global step 3199: val/accuracy was not in top 1
+Epoch 16, global step 3399: val/accuracy was not in top 1
+Epoch 17, global step 3599: val/accuracy was not in top 1
+Epoch 18, global step 3799: val/accuracy was not in top 1
+Epoch 19, global step 3999: val/accuracy reached 0.75600 (best 0.75600), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 20, global step 4199: val/accuracy was not in top 1
+Epoch 21, global step 4399: val/accuracy was not in top 1
+Epoch 22, global step 4599: val/accuracy reached 0.75610 (best 0.75610), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 23, global step 4799: val/accuracy was not in top 1
+Epoch 24, global step 4999: val/accuracy was not in top 1
+Epoch 25, global step 5199: val/accuracy was not in top 1
+Epoch 26, global step 5399: val/accuracy was not in top 1
+Epoch 27, global step 5599: val/accuracy reached 0.75635 (best 0.75635), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 28, global step 5799: val/accuracy reached 0.76585 (best 0.76585), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 29, global step 5999: val/accuracy reached 0.79435 (best 0.79435), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 30, global step 6199: val/accuracy reached 0.85260 (best 0.85260), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 31, global step 6399: val/accuracy reached 0.90315 (best 0.90315), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 32, global step 6599: val/accuracy reached 0.93910 (best 0.93910), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 33, global step 6799: val/accuracy reached 0.95320 (best 0.95320), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 34, global step 6999: val/accuracy reached 0.96040 (best 0.96040), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 35, global step 7199: val/accuracy reached 0.96445 (best 0.96445), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 36, global step 7399: val/accuracy reached 0.97005 (best 0.97005), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 37, global step 7599: val/accuracy reached 0.97215 (best 0.97215), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 38, global step 7799: val/accuracy reached 0.97370 (best 0.97370), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 39, global step 7999: val/accuracy reached 0.97635 (best 0.97635), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 40, global step 8199: val/accuracy reached 0.97765 (best 0.97765), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 41, global step 8399: val/accuracy reached 0.97810 (best 0.97810), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 42, global step 8599: val/accuracy reached 0.98010 (best 0.98010), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 43, global step 8799: val/accuracy reached 0.98220 (best 0.98220), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 44, global step 8999: val/accuracy reached 0.98230 (best 0.98230), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 45, global step 9199: val/accuracy reached 0.98450 (best 0.98450), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 46, global step 9399: val/accuracy reached 0.98525 (best 0.98525), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 47, global step 9599: val/accuracy reached 0.98555 (best 0.98555), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 48, global step 9799: val/accuracy was not in top 1
+Epoch 49, global step 9999: val/accuracy reached 0.98655 (best 0.98655), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 50, global step 10199: val/accuracy reached 0.98755 (best 0.98755), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 51, global step 10399: val/accuracy was not in top 1
+Epoch 52, global step 10599: val/accuracy reached 0.98865 (best 0.98865), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 53, global step 10799: val/accuracy was not in top 1
+Epoch 54, global step 10999: val/accuracy was not in top 1
+Epoch 55, global step 11199: val/accuracy reached 0.98950 (best 0.98950), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 56, global step 11399: val/accuracy reached 0.99050 (best 0.99050), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 57, global step 11599: val/accuracy reached 0.99105 (best 0.99105), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 58, global step 11799: val/accuracy reached 0.99115 (best 0.99115), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 59, global step 11999: val/accuracy reached 0.99120 (best 0.99120), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 60, global step 12199: val/accuracy reached 0.99170 (best 0.99170), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 61, global step 12399: val/accuracy reached 0.99210 (best 0.99210), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 62, global step 12599: val/accuracy was not in top 1
+Epoch 63, global step 12799: val/accuracy reached 0.99295 (best 0.99295), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 64, global step 12999: val/accuracy reached 0.99345 (best 0.99345), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 65, global step 13199: val/accuracy was not in top 1
+Epoch 66, global step 13399: val/accuracy reached 0.99395 (best 0.99395), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 67, global step 13599: val/accuracy was not in top 1
+Epoch 68, global step 13799: val/accuracy reached 0.99405 (best 0.99405), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 69, global step 13999: val/accuracy reached 0.99520 (best 0.99520), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 70, global step 14199: val/accuracy reached 0.99550 (best 0.99550), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 71, global step 14399: val/accuracy reached 0.99585 (best 0.99585), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 72, global step 14599: val/accuracy reached 0.99595 (best 0.99595), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 73, global step 14799: val/accuracy was not in top 1
+Epoch 74, global step 14999: val/accuracy reached 0.99650 (best 0.99650), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 75, global step 15199: val/accuracy was not in top 1
+Epoch 76, global step 15399: val/accuracy was not in top 1
+Epoch 77, global step 15599: val/accuracy was not in top 1
+Epoch 78, global step 15799: val/accuracy was not in top 1
+Epoch 79, global step 15999: val/accuracy reached 0.99675 (best 0.99675), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 80, global step 16199: val/accuracy reached 0.99725 (best 0.99725), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 81, global step 16399: val/accuracy was not in top 1
+Epoch 82, global step 16599: val/accuracy was not in top 1
+Epoch 83, global step 16799: val/accuracy reached 0.99745 (best 0.99745), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 84, global step 16999: val/accuracy reached 0.99780 (best 0.99780), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 85, global step 17199: val/accuracy was not in top 1
+Epoch 86, global step 17399: val/accuracy was not in top 1
+Epoch 87, global step 17599: val/accuracy was not in top 1
+Epoch 88, global step 17799: val/accuracy was not in top 1
+Epoch 89, global step 17999: val/accuracy was not in top 1
+Epoch 90, global step 18199: val/accuracy was not in top 1
+Epoch 91, global step 18399: val/accuracy reached 0.99785 (best 0.99785), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 92, global step 18599: val/accuracy was not in top 1
+Epoch 93, global step 18799: val/accuracy reached 0.99815 (best 0.99815), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 94, global step 18999: val/accuracy was not in top 1
+Epoch 95, global step 19199: val/accuracy was not in top 1
+Epoch 96, global step 19399: val/accuracy was not in top 1
+Epoch 97, global step 19599: val/accuracy was not in top 1
+Epoch 98, global step 19799: val/accuracy was not in top 1
+Epoch 99, global step 19999: val/accuracy reached 0.99825 (best 0.99825), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 100, global step 20199: val/accuracy was not in top 1
+Epoch 101, global step 20399: val/accuracy was not in top 1
+Epoch 102, global step 20599: val/accuracy was not in top 1
+Epoch 103, global step 20799: val/accuracy was not in top 1
+Epoch 104, global step 20999: val/accuracy was not in top 1
+Epoch 105, global step 21199: val/accuracy was not in top 1
+Epoch 106, global step 21399: val/accuracy was not in top 1
+Epoch 107, global step 21599: val/accuracy reached 0.99855 (best 0.99855), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 108, global step 21799: val/accuracy was not in top 1
+Epoch 109, global step 21999: val/accuracy was not in top 1
+Epoch 110, global step 22199: val/accuracy was not in top 1
+Epoch 111, global step 22399: val/accuracy was not in top 1
+Epoch 112, global step 22599: val/accuracy was not in top 1
+Epoch 113, global step 22799: val/accuracy was not in top 1
+Epoch 114, global step 22999: val/accuracy reached 0.99860 (best 0.99860), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 115, global step 23199: val/accuracy was not in top 1
+Epoch 116, global step 23399: val/accuracy was not in top 1
+Epoch 117, global step 23599: val/accuracy was not in top 1
+Epoch 118, global step 23799: val/accuracy was not in top 1
+Epoch 119, global step 23999: val/accuracy reached 0.99865 (best 0.99865), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 120, global step 24199: val/accuracy was not in top 1
+Epoch 121, global step 24399: val/accuracy reached 0.99865 (best 0.99865), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 122, global step 24599: val/accuracy was not in top 1
+Epoch 123, global step 24799: val/accuracy was not in top 1
+Epoch 124, global step 24999: val/accuracy was not in top 1
+Epoch 125, global step 25199: val/accuracy was not in top 1
+Epoch 126, global step 25399: val/accuracy was not in top 1
+Epoch 127, global step 25599: val/accuracy was not in top 1
+Epoch 128, global step 25799: val/accuracy was not in top 1
+Epoch 129, global step 25999: val/accuracy was not in top 1
+Epoch 130, global step 26199: val/accuracy reached 0.99895 (best 0.99895), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 131, global step 26399: val/accuracy was not in top 1
+Epoch 132, global step 26599: val/accuracy was not in top 1
+Epoch 133, global step 26799: val/accuracy was not in top 1
+Epoch 134, global step 26999: val/accuracy was not in top 1
+Epoch 135, global step 27199: val/accuracy was not in top 1
+Epoch 136, global step 27399: val/accuracy was not in top 1
+Epoch 137, global step 27599: val/accuracy was not in top 1
+Epoch 138, global step 27799: val/accuracy was not in top 1
+Epoch 139, global step 27999: val/accuracy was not in top 1
+Epoch 140, global step 28199: val/accuracy was not in top 1
+Epoch 141, global step 28399: val/accuracy was not in top 1
+Epoch 142, global step 28599: val/accuracy was not in top 1
+Epoch 143, global step 28799: val/accuracy was not in top 1
+Epoch 144, global step 28999: val/accuracy was not in top 1
+Epoch 145, global step 29199: val/accuracy was not in top 1
+Epoch 146, global step 29399: val/accuracy reached 0.99900 (best 0.99900), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 147, global step 29599: val/accuracy was not in top 1
+Epoch 148, global step 29799: val/accuracy was not in top 1
+Epoch 149, global step 29999: val/accuracy was not in top 1
+Epoch 150, global step 30199: val/accuracy reached 0.99900 (best 0.99900), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 151, global step 30399: val/accuracy was not in top 1
+Epoch 152, global step 30599: val/accuracy was not in top 1
+Epoch 153, global step 30799: val/accuracy was not in top 1
+Epoch 154, global step 30999: val/accuracy was not in top 1
+Epoch 155, global step 31199: val/accuracy was not in top 1
+Epoch 156, global step 31399: val/accuracy reached 0.99910 (best 0.99910), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 157, global step 31599: val/accuracy reached 0.99920 (best 0.99920), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 158, global step 31799: val/accuracy was not in top 1
+Epoch 159, global step 31999: val/accuracy was not in top 1
+Epoch 160, global step 32199: val/accuracy was not in top 1
+Epoch 161, global step 32399: val/accuracy was not in top 1
+Epoch 162, global step 32599: val/accuracy was not in top 1
+Epoch 163, global step 32799: val/accuracy was not in top 1
+Epoch 164, global step 32999: val/accuracy was not in top 1
+Epoch 165, global step 33199: val/accuracy was not in top 1
+Epoch 166, global step 33399: val/accuracy was not in top 1
+Epoch 167, global step 33599: val/accuracy was not in top 1
+Epoch 168, global step 33799: val/accuracy was not in top 1
+Epoch 169, global step 33999: val/accuracy was not in top 1
+Epoch 170, global step 34199: val/accuracy reached 0.99925 (best 0.99925), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 171, global step 34399: val/accuracy reached 0.99940 (best 0.99940), saving model to "/home/siqiouyang/work/projects/state-spaces/outputs/2022-11-02/23-51-58-628136/checkpoints/val/accuracy.ckpt" as top 1
+Epoch 172, global step 34599: val/accuracy was not in top 1
+Epoch 173, global step 34799: val/accuracy was not in top 1
+Epoch 174, global step 34999: val/accuracy was not in top 1
+Epoch 175, global step 35199: val/accuracy was not in top 1
+Epoch 176, global step 35399: val/accuracy was not in top 1
+Epoch 177, global step 35599: val/accuracy was not in top 1
+Epoch 178, global step 35799: val/accuracy was not in top 1
+Epoch 179, global step 35999: val/accuracy was not in top 1
+Epoch 180, global step 36199: val/accuracy was not in top 1
+Epoch 181, global step 36399: val/accuracy was not in top 1
+Epoch 182, global step 36599: val/accuracy was not in top 1
+slurmstepd: error: *** JOB 702 ON aries CANCELLED AT 2022-11-03T00:02:09 ***
+bypassing sigterm
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x7f208620fc10>
+Traceback (most recent call last):
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1510, in __del__
+    self._shutdown_workers()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/utils/data/dataloader.py", line 1455, in _shutdown_workers
+    self._worker_result_queue.put((None, None))
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/queues.py", line 88, in put
+    self._start_thread()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/queues.py", line 173, in _start_thread
+    self._thread.start()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/threading.py", line 857, in start
+    self._started.wait()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/threading.py", line 558, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/threading.py", line 302, in wait
+    waiter.acquire()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 3010691) is killed by signal: Terminated. 
+Exception in thread Thread-558:
+Traceback (most recent call last):
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/threading.py", line 932, in _bootstrap_inner
+    self.run()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/threading.py", line 870, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/utils/data/_utils/pin_memory.py", line 28, in _pin_memory_loop
+    r = in_queue.get(timeout=MP_STATUS_CHECK_INTERVAL)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/queues.py", line 116, in get
+    return _ForkingPickler.loads(res)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/multiprocessing/reductions.py", line 297, in rebuild_storage_fd
+    fd = df.detach()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/resource_sharer.py", line 57, in detach
+    with _resource_sharer.get_connection(self._id) as conn:
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/resource_sharer.py", line 87, in get_connection
+    c = Client(address, authkey=process.current_process().authkey)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/connection.py", line 508, in Client
+    answer_challenge(c, authkey)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/connection.py", line 757, in answer_challenge
+    response = connection.recv_bytes(256)        # reject large message
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/connection.py", line 216, in recv_bytes
+    buf = self._recv_bytes(maxlength)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/connection.py", line 414, in _recv_bytes
+    buf = self._recv(4)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/multiprocessing/connection.py", line 383, in _recv
+    raise EOFError
+EOFError
+Error executing job with overrides: ['pipeline=repeat', 'dataset.n_train=10000', 'trainer.max_epochs=1000', 'model=mega_dev', 'model.layer.0.ema_heads=1', 'model.layer.0.attn_dim_qk=8', 'model.layer.0.attn_dim_value=32', '+wandb.name=repeat_mega_10xtrain']
+Traceback (most recent call last):
+  File "/home/siqiouyang/work/projects/state-spaces/train.py", line 691, in main
+    train(config)
+  File "/home/siqiouyang/work/projects/state-spaces/train.py", line 666, in train
+    trainer.fit(model)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 740, in fit
+    self._call_and_handle_interrupt(
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 685, in _call_and_handle_interrupt
+    return trainer_fn(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 777, in _fit_impl
+    self._run(model, ckpt_path=ckpt_path)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1199, in _run
+    self._dispatch()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1279, in _dispatch
+    self.training_type_plugin.start_training(self)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py", line 202, in start_training
+    self._results = trainer.run_stage()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1289, in run_stage
+    return self._run_train()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/trainer/trainer.py", line 1319, in _run_train
+    self.fit_loop.run()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 145, in run
+    self.advance(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/fit_loop.py", line 234, in advance
+    self.epoch_loop.run(data_fetcher)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 145, in run
+    self.advance(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/epoch/training_epoch_loop.py", line 193, in advance
+    batch_output = self.batch_loop.run(batch, batch_idx)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 145, in run
+    self.advance(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/batch/training_batch_loop.py", line 88, in advance
+    outputs = self.optimizer_loop.run(split_batch, optimizers, batch_idx)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/base.py", line 145, in run
+    self.advance(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 215, in advance
+    result = self._run_optimization(
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 266, in _run_optimization
+    self._optimizer_step(optimizer, opt_idx, batch_idx, closure)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 378, in _optimizer_step
+    lightning_module.optimizer_step(
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/core/lightning.py", line 1652, in optimizer_step
+    optimizer.step(closure=optimizer_closure)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/core/optimizer.py", line 164, in step
+    trainer.accelerator.optimizer_step(self._optimizer, self._optimizer_idx, closure, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py", line 339, in optimizer_step
+    self.precision_plugin.optimizer_step(model, optimizer, opt_idx, closure, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 163, in optimizer_step
+    optimizer.step(closure=closure, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/optim/lr_scheduler.py", line 65, in wrapper
+    return wrapped(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/optim/optimizer.py", line 113, in wrapper
+    return func(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/optim/adamw.py", line 119, in step
+    loss = closure()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/plugins/precision/precision_plugin.py", line 148, in _wrap_closure
+    closure_result = closure()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 160, in __call__
+    self._result = self.closure(*args, **kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 142, in closure
+    step_output = self._step_fn()
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/loops/optimization/optimizer_loop.py", line 435, in _training_step
+    training_step_output = self.trainer.accelerator.training_step(step_kwargs)
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/accelerators/accelerator.py", line 219, in training_step
+    return self.training_type_plugin.training_step(*step_kwargs.values())
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/pytorch_lightning/plugins/training_type/training_type_plugin.py", line 213, in training_step
+    return self.model.training_step(*args, **kwargs)
+  File "/home/siqiouyang/work/projects/state-spaces/train.py", line 400, in training_step
+    loss = self._shared_step(batch, batch_idx, prefix="train")
+  File "/home/siqiouyang/work/projects/state-spaces/train.py", line 321, in _shared_step
+    x, y, w = self.forward(batch)
+  File "/home/siqiouyang/work/projects/state-spaces/train.py", line 301, in forward
+    x, w = self.encoder(x, **z) # w can model-specific constructions such as key_padding_mask for transformers or state for RNNs
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/siqiouyang/work/projects/state-spaces/src/models/nn/utils.py", line 112, in forward
+    x, kwargs = wrap_kwargs(layer.forward)(x, **kwargs)
+  File "/home/siqiouyang/work/projects/state-spaces/src/models/nn/utils.py", line 77, in f_kwargs
+    y = f(**bound.arguments)
+  File "/home/siqiouyang/work/projects/state-spaces/src/tasks/encoders.py", line 86, in forward
+    x = x + self.pe[: x.size(-2)]
+  File "/home/siqiouyang/anaconda3/envs/ssm/lib/python3.8/site-packages/torch/utils/data/_utils/signal_handling.py", line 66, in handler
+    _error_if_any_worker_fails()
+RuntimeError: DataLoader worker (pid 3024223) is killed by signal: Terminated. 
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+wandb: While tearing down the service manager. The following error has occured: [Errno 32] Broken pipe

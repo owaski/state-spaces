@@ -1,0 +1,6 @@
+_name_: repeatreg
+n_train: 1000
+n_val: 200
+n_test: 200
+l_seq: 100
+d_seq: 16

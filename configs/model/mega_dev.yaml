@@ -1,0 +1,16 @@
+# Large Transformer model used as baseline for WikiText-103
+defaults:
+  - base
+  - override layer: mega
+
+encoder:
+  _name_: position
+  dropout: ${..dropout}
+
+n_layers: 1
+d_model: 16
+
+# layer.0:
+#   ema_heads: 1
+#   attn_dim_qk: 8
+#   attn_dim_value: 32

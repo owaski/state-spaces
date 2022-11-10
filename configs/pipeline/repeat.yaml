@@ -1,0 +1,22 @@
+# @package _global_
+defaults:
+  - /trainer: default
+  - /loader: default
+  - /dataset: repeat
+  - /task: multiclass_classification
+  - /optimizer: adamw
+  - /scheduler: constant
+
+train:
+  monitor: val/accuracy # Needed for plateau scheduler
+  mode: max
+
+trainer:
+  max_epochs: 400
+
+encoder: linear
+
+decoder:
+  _name_: sequence
+  mode: last
+

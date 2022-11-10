@@ -1,0 +1,11 @@
+- _name_: mega
+  ema_heads: 16
+  attn_dim_qk: 64
+  attn_dim_value: 256
+  laplacian_attn_fn: False
+  causal: True
+  disable_ema: False
+- _name_: ff
+  expand: 4
+  activation: gelu
+  dropout: ${...dropout} # Same as null

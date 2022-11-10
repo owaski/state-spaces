@@ -1,0 +1,20 @@
+defaults:
+  - base
+  - override layer: s4
+  - _self_
+
+transposed: false # Actually faster than "true"
+tie_dropout: true
+
+encoder:
+  _name_: position
+  dropout: ${..dropout}
+
+n_layers: 1
+d_model: 16
+
+layer:
+  n_ssm: 16
+  d_state: 4
+  dt_min: 0.01
+  dt_max: 1
